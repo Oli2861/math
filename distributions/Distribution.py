@@ -93,7 +93,7 @@ class DisitrbutionOperations:
     @staticmethod
     def linear_transform(old: Distribution, A: np.ndarray, b: np.ndarray):
         # Transform old mu into 2x1 column vector for multiplication
-        old_mu = np.full((2, 1), dist.mu)
+        old_mu = np.full((2, 1), old.mu)
         # Make b from row to a columnn vector
         b_col = b[:, np.newaxis]
 
@@ -104,7 +104,7 @@ class DisitrbutionOperations:
         print(f"Calculation of the new mean:\n{A}\t\tA\nx\t\tx\n{old_mu}\t\told mu\n+\n{b_col}\t\tb\n=\t\t=\n{mu_x}\t\ttransformed mu\n\n")
 
         # Create 2x2 matrix with sigma on the diagonal
-        old_sigma = np.diag([dist.sigma ** 2] * 2)
+        old_sigma = np.diag([old.sigma ** 2] * 2)
 
         sigma_x = A @ old_sigma @ A.T
         # print(f"Old sigma:\n{old_sigma}")
