@@ -17,11 +17,16 @@ def plot_vectors(*vector_name: Tuple[np.ndarray, str]):
     plt.show()
 
 
-def pretty_print_matrix(matrix):
+def pretty_print_matrix(matrix, label: str = None):
+    if label is not None:
+        print(label)
     print("[")
     for row in matrix:
         print("  ", end="")
-        for entry in row:
-            print(entry, end=" ")
+        if isinstance(row, np.ndarray) or isinstance(row, list):
+            for entry in row:
+                print(entry, end=" ")
+        else:
+            print(row, end=" ")
         print()
     print("]")
