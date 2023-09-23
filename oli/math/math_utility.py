@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import Tuple
 
+
 def plot_vectors(*vector_name: Tuple[np.ndarray, str]):
     labels = []
     for vn in vector_name:
@@ -14,3 +15,13 @@ def plot_vectors(*vector_name: Tuple[np.ndarray, str]):
     plt.ylim([-10, 10])
     plt.legend(labels)
     plt.show()
+
+
+def pretty_print_matrix(matrix):
+    print("[")
+    for row in matrix:
+        print("  ", end="")
+        for entry in row:
+            print(entry, end=" ")
+        print()
+    print("]")
