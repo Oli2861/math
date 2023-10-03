@@ -19,3 +19,23 @@ def absolute_value_loss_element_wise(pred: np.ndarray, label: np.ndarray) -> np.
 def absolute_value_loss(pred: np.ndarray, label: np.ndarray) -> float:
     """Returns the absolute value loss between the prediction and label: |pred - actual|."""
     return np.sum(abs(label - pred))
+
+
+def mean_squared_error_loss_categorical(pred: list[float], label: int) -> float:
+    """
+    Calculates the mean squared error loss for categorical values.
+    Uses 0.01 as target for miss-classification and 0.99 for correct label.
+    :param pred: The list of predictions.
+    :param label: The label.
+    :return: Squared error loss.
+    """
+    target = [0.01 for i in range(len(pred))]
+    target[label] = 0.99
+    sum = 0
+    for i in range(len(target)):
+        sum += (target[i] - pred[i]) ** 2
+    return sum / len(target)
+
+
+def derivative_mean_squared_error_loss_categorical(pred: float, label: float) -> float:
+    return 2 * (pred - label)

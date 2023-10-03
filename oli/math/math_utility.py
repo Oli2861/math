@@ -17,7 +17,7 @@ def plot_vectors(*vector_name: Tuple[np.ndarray, str]):
     plt.show()
 
 
-def pretty_print_matrix(matrix, label: str = None):
+def pretty_print_matrix(matrix, label: str = None, max_length: int = 1):
     if label is not None:
         print(label)
     print("[")
@@ -25,7 +25,7 @@ def pretty_print_matrix(matrix, label: str = None):
         print("  ", end="")
         if isinstance(row, np.ndarray) or isinstance(row, list):
             for entry in row:
-                print(entry, end=" ")
+                print(f"{entry:^{max_length}}", end=" ")
         else:
             print(row, end=" ")
         print()
