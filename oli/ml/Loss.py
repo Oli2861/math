@@ -21,7 +21,12 @@ def absolute_value_loss(pred: np.ndarray, label: np.ndarray) -> float:
     return np.sum(abs(label - pred))
 
 
-def mean_squared_error_loss_categorical(pred: list[float], label: int) -> float:
+def mean_squared_error_loss_categorical(
+        pred: list[float],
+        label: int,
+        correct_value: float = 1,
+        incorrect_value=0
+) -> float:
     """
     Calculates the mean squared error loss for categorical values.
     Uses 0.01 as target for miss-classification and 0.99 for correct label.
@@ -29,8 +34,8 @@ def mean_squared_error_loss_categorical(pred: list[float], label: int) -> float:
     :param label: The label.
     :return: Squared error loss.
     """
-    target = [0.01 for i in range(len(pred))]
-    target[label] = 0.99
+    target = [incorrect_value for i in range(len(pred))]
+    target[label] = correct_value
     sum = 0
     for i in range(len(target)):
         sum += (target[i] - pred[i]) ** 2
