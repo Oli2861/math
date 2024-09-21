@@ -3,3 +3,4 @@
 __pycache__
 venv
 /data/
+/notebooks/ML/Pytorch/data/FashionMNIST/raw/
