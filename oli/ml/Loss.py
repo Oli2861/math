@@ -37,5 +37,32 @@ def mean_squared_error_loss_categorical(pred: list[float], label: int) -> float:
     return sum / len(target)
 
 
+def categorical_cross_entropy_loss(pred: list[float], label: int) -> float:
+    """
+    Calculates the cross entropy loss for categorical values.
+    Uses 0.01 as target for miss-classification and 0.99 for correct label.
+    :param pred: The list of predictions.
+    :param label: The label.
+    :return: Cross entropy loss.
+    """
+    target = [0.01 for i in range(len(pred))]
+    target[label] = 0.99
+    sum = 0
+    for i in range(len(target)):
+        sum += target[i] * np.log(pred[i] + 1e-10)
+    return -sum
+
+
 def derivative_mean_squared_error_loss_categorical(pred: float, label: float) -> float:
     return 2 * (pred - label)
+
+
+def derivative_categorical_cross_entropy_loss(pred: float, label: float) -> float:
+    """
+    Calculates the derivative of the cross entropy loss for categorical values.
+    https://towardsdatascience.com/derivative-of-the-softmax-function-and-the-categorical-cross-entropy-loss-ffceefc081d1
+    :param pred: The prediction.
+    :param label: The label.
+    :return: The derivative of the cross entropy loss.
+    """
+    return pred - label

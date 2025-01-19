@@ -1,6 +1,4 @@
 import numpy as np
-import math
-
 
 def sigmoid(x: float) -> float:
     """
@@ -17,3 +15,14 @@ def relu(x: float) -> float:
 
 def relu_derivative(x: float) -> float:
     return 1 if x > 0 else 0
+
+def softmax(x: list[float]) -> list[float]:
+    """
+    Converts vector into probability distribution of outcomes.
+    :param x: Vector.
+    :return: Probability distribution of outcomes.
+    """
+    sum = 0.0000000000000000000000001
+    for item in x:
+        sum += item
+    return [curr / sum for curr in x]
